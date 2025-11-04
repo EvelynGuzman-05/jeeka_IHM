@@ -72,11 +72,31 @@ main {
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 
+  .info{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+    
   h2 {
     margin-top: 0;
     color: var(--primary-color);
-    border-bottom: 2px solid #eee;
-    padding-bottom: 8px;
+  }
+
+  a{
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+    margin-right: 20px;
+  }
   }
 
   .lanzamientos-grid {
@@ -102,6 +122,8 @@ main {
     }
   }
 }
+
+
 
 footer {
   display: grid;

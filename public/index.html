@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sección de lanzamientos Horus Space Lab">
+  <meta name="author" content="Evelyn Guzman">
+  <meta name="keywords" content="Horus, Space, Lab, Lanzamientos">
+  <title>Lanzamientos Horus Space Lab</title>
+  <link rel="stylesheet" href="css/lanzamientos.css">
+  <script src="js/lanzamientos.js" defer></script>
+</head>
+
+<body>
+  <header id="menu">
+    <nav>
+      <img src="imagenes/logo.jpg" alt="Logo Horus Space Lab">
+      <h1><span>Horus Space Lab</span></h1>
+    </nav>
+  </header>
+
+  <main>
+    <section class="lanzamientos-content">
+      <div class="info">
+        <h2>Lanzamientos Recientes</h2>
+        <button id="btnAgregar" type="button">Agregar lanzamiento</button>
+      </div>
+      <div class="lanzamientos-grid" id="listaLanzamientos">
+        
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Evelyn Guzmán</p>
+  </footer>
+
+  <div id="formLanzamiento" class="form-lanzamiento hidden">
+    <div class="form-contenido">
+      <h3>Nuevo Lanzamiento</h3>
+
+      <label for="nombreLanzamiento">Nombre:</label>
+      <input type="text" id="nombreLanzamiento" required>
+
+      <label for="fechaLanzamiento">Fecha:</label>
+      <input type="date" id="fechaLanzamiento" required>
+
+      <label for="horaLanzamiento">Hora:</label>
+      <input type="time" id="horaLanzamiento" required>
+
+      <label for="ubicacionLanzamiento">Ubicación:</label>
+      <input type="text" id="ubicacionLanzamiento" required>
+
+      <div class="botones-form">
+        <button id="guardarLanzamiento">Guardar</button>
+        <button id="cancelarLanzamiento">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

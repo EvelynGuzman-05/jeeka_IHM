@@ -15,58 +15,56 @@ body {
   
 }
 
-#sidebar {
-  width: 220px;
-  background-color: var(--primary-color);
-  color: white;
-  display: flex;
-  flex-direction: column;
+#menu {
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-
-  nav {
+  width: 100%;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: #fff;;
+  
+  nav{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    padding-top: 20px;
-
-    img {
-      width: 120px;
-    
-      margin-bottom: 25px;
-      background-color: rgba(255,255,255,0.2);
-     
-    }
-    ul {
-      list-style: none;
-      
-      li {
-        a {
-          display: block;
-          padding: 15px 20px;
-          color: white;
-          text-decoration: none;
-          transition: background 0.3s;
-
-          &:hover {
-            background-color: var(--secondary-color);
-          }
-        }
-      }
-    }
+    height: 50px;
+  
+  img{
+    width: 50px;
+    height: 50px;
+    margin: 10px;
   }
+  
+  h1{
+    font-size: 14px;
+    color: var(--primary-color)
+    }
+
+    a{
+      margin-left: auto;
+      text-decoration: none;
+      font-size: 16px;
+      color: white;
+      background-color: var(--secondary-color);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background-color 0.3s ease-in-out;
+      margin-right: 20px;
+    }
+}
 }
 
+
 main {
-  margin-left: 220px;
+
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   background-color: #f3f4f6;
   min-height: 100vh;
+  margin-top: 50px;
 
   section {
     background-color: #fff;
@@ -84,10 +82,11 @@ main {
 
   
     
-    .graficas {
+  .graficas {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+  
 
   .grafica {
     display: flex;

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interfaz de monitoreo de la estación terrena Horus Space Lab">
+    <meta name="author" content="Evelyn Guzman">
+    <meta name="keywords" content="Horus, Space, Lab, Estación, Terrena, Monitoreo">
+    <title>Horus Space Lab</title>
+    <link rel="stylesheet" href="css/monitoreo.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/monitoreo.js" defer></script>
+
+</head>
+
+<body>
+   <header id="menu">
+        <nav>
+            <img src="imagenes/logo.jpg" alt="Logo Horus Space Lab">
+            <h1>
+                <span> Horus Space Lab</span>
+            </h1>
+              <a href="lanzamientos.html">Inicio</a>
+        </nav>
+    </header>
+  
+  
+  <main>
+    <section class="graficas-content">
+      <div class="graficas">
+        <div class="grafica">
+          <p>Aceleración</p>
+          <canvas id="graficaAce"></canvas>
+        </div>
+        <div class="grafica">
+          <p>Giroscopio</p>
+          <canvas id="graficaGiro"></canvas>
+        </div>
+        <div class="grafica">
+          <p>Temperatura</p>
+          <canvas id="graficaTemp"></canvas>
+        </div>
+        <div class="grafica">
+          <p>Altitud</p>
+          <canvas id="graficaAlt"></canvas>
+        </div>
+        <div class="grafica">
+          <p>Latitud</p>
+          <canvas id="graficaLt"></canvas>
+        </div>
+        <div class="grafica">
+          <p>Longitud</p>
+          <canvas id="graficaLng"></canvas>
+        </div>
+        <div class="grafica">
+          <p>Humedad</p>
+          <canvas id="graficaH"></canvas>
+        </div>
+      </div>
+    </section>
+    
+    <section class="estado-sensor">
+      <div id="estado">
+        <h3>Estado del sistema</h3>
+        <ul>
+          <li><input type="checkbox" id="lora-ok" disabled> <label for="lora-ok">LoRa inició correctamente</label></li>
+          <li><input type="checkbox" id="lora-error" disabled> <label for="lora-error">Error al iniciar el LoRa</label></li>
+          <li><input type="checkbox" id="bmp-ok" disabled> <label for="bmp-ok">BMP inició correctamente</label></li>
+          <li><input type="checkbox" id="bmp-error" disabled> <label for="bmp-error">Error al iniciar el BMP</label></li>
+          <li><input type="checkbox" id="sistema-ok" disabled> <label for="sistema-ok">Todo el sistema inició correctamente</label></li>
+          <li><input type="checkbox" id="altitud-activado" disabled> <label for="altitud-activado">Sistema activado por altitud</label></li>
+          <li><input type="checkbox" id="descenso-activado" disabled> <label for="descenso-activado">Activación por descenso</label></li>
+          <li><input type="checkbox" id="aceleracion-activado" disabled> <label for="aceleracion-activado">Activación por cambio en la aceleración</label></li>
+        </ul>
+      </div>
+      
+      <div class="sensores">
+        <div class="sensor" id="temperatura">TEMPERATURA: 0 °C</div>
+        <div class="sensor" id="presion">PRESIÓN: 0 hPa</div>
+        <div class="sensor" id="altitud">ALTITUD: 0 m</div>
+      </div>
+      
+      <div class="botones">
+        <button id="btnDesactivar">FINALIZAR</button>
+        <button id="btnPausar">PAUSAR</button>
+        <button id="btnReiniciar">REINICIAR</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Evelyn Guzman</p>
+  </footer>
+
+</body>
+</html>

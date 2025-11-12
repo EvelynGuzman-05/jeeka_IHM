@@ -14,49 +14,34 @@ body {
 }
 
 
-#sidebar {
-  width: 220px;
-  background-color: var(--primary-color);
-  color: white;
-  display: flex;
-  flex-direction: column;
+#menu {
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
-
-  nav {
+  width: 100%;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: #fff;;
+  
+  nav{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    padding-top: 20px;
-
-    img {
-      width: 120px;
-      margin-bottom: 25px;
-    }
-
-    ul {
-      list-style: none;
-
-      li a {
-        display: block;
-        padding: 15px 20px;
-        color: white;
-        text-decoration: none;
-        transition: background 0.3s;
-      }
-
-      li a:hover {
-        background-color: var(--secondary-color);
-      }
-    }
+    height: 50px;
+  
+  img{
+    width: 50px;
+    height: 50px;
+    margin: 10px;
   }
+  
+  h1{
+    font-size: 14px;
+    color: var(--primary-color)
+    }
+}
 }
 
-
 main {
-  margin-left: 220px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -71,6 +56,7 @@ main {
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 50px;
 
   .info{
     display: flex;
@@ -86,7 +72,7 @@ main {
     color: var(--primary-color);
   }
 
-  a{
+  button {
     text-decoration: none;
     font-size: 16px;
     color: white;
@@ -132,4 +118,67 @@ footer {
   width: 100%;
   background-color: var(--primary-color);
   color: white;
+}
+
+
+
+.form-lanzamiento {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;             
+  justify-content: center;
+  align-items: center;
+
+  &.hidden {
+    display: none;          
+  }
+
+  .form-contenido {
+    background-color: white;
+    border-radius: 10px;
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .botones-form {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+
+        &#guardarLanzamiento {
+          background-color: var(--secondary-color);
+          color: white;
+        }
+
+        &#cancelarLanzamiento {
+          background-color: #ccc;
+        }
+      }
+    }
+  }
 }

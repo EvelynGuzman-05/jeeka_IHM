@@ -1,0 +1,27 @@
+{
+  "name": "estacion-terrena",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvelynGuzman-05/jeeka_IHM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvelynGuzman-05/jeeka_IHM/issues"
+  },
+  "homepage": "https://github.com/EvelynGuzman-05/jeeka_IHM#readme",
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.3",
+    "serialport": "^13.0.0",
+    "socket.io": "^4.8.1"
+  }
+}

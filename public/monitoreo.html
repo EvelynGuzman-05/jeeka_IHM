@@ -30,31 +30,30 @@
     <section class="graficas-content">
       <div class="graficas">
         <div class="grafica">
-          <p>Aceleración</p>
           <canvas id="graficaAce"></canvas>
         </div>
         <div class="grafica">
-          <p>Giroscopio</p>
+          
           <canvas id="graficaGiro"></canvas>
         </div>
         <div class="grafica">
-          <p>Temperatura</p>
+          
           <canvas id="graficaTemp"></canvas>
         </div>
         <div class="grafica">
-          <p>Altitud</p>
+          
           <canvas id="graficaAlt"></canvas>
         </div>
         <div class="grafica">
-          <p>Latitud</p>
+          
           <canvas id="graficaLt"></canvas>
         </div>
         <div class="grafica">
-          <p>Longitud</p>
-          <canvas id="graficaLng"></canvas>
+          
+          <canvas id="graficaLg"></canvas>
         </div>
         <div class="grafica">
-          <p>Humedad</p>
+          
           <canvas id="graficaH"></canvas>
         </div>
       </div>
@@ -64,14 +63,14 @@
       <div id="estado">
         <h3>Estado del sistema</h3>
         <ul>
-          <li><input type="checkbox" id="lora-ok" disabled> <label for="lora-ok">LoRa inició correctamente</label></li>
-          <li><input type="checkbox" id="lora-error" disabled> <label for="lora-error">Error al iniciar el LoRa</label></li>
-          <li><input type="checkbox" id="bmp-ok" disabled> <label for="bmp-ok">BMP inició correctamente</label></li>
-          <li><input type="checkbox" id="bmp-error" disabled> <label for="bmp-error">Error al iniciar el BMP</label></li>
-          <li><input type="checkbox" id="sistema-ok" disabled> <label for="sistema-ok">Todo el sistema inició correctamente</label></li>
-          <li><input type="checkbox" id="altitud-activado" disabled> <label for="altitud-activado">Sistema activado por altitud</label></li>
-          <li><input type="checkbox" id="descenso-activado" disabled> <label for="descenso-activado">Activación por descenso</label></li>
-          <li><input type="checkbox" id="aceleracion-activado" disabled> <label for="aceleracion-activado">Activación por cambio en la aceleración</label></li>
+          <li><input type="checkbox" id="lora-ok"  class="ok" readonly> <label for="lora-ok">LoRa inició correctamente</label></li>
+          <li><input type="checkbox" id="lora-error" class="error" readonly> <label for="lora-error">Error al iniciar el LoRa</label></li>
+          <li><input type="checkbox" id="bmp-ok" class="ok" readonly> <label for="bmp-ok">BMP inició correctamente</label></li>
+          <li><input type="checkbox" id="bmp-error" class="error" readonly> <label for="bmp-error">Error al iniciar el BMP</label></li>
+          <li><input type="checkbox" id="sistema-ok" class="ok" readonly> <label for="sistema-ok">Todo el sistema inició correctamente</label></li>
+          <li><input type="checkbox" id="altitud-activado" class="ok" readonly> <label for="altitud-activado">Sistema activado por altitud</label></li>
+          <li><input type="checkbox" id="descenso-activado" class="ok" readonly> <label for="descenso-activado">Activación por descenso</label></li>
+          <li><input type="checkbox" id="aceleracion-activado" class="ok" readonly> <label for="aceleracion-activado">Activación por cambio en la aceleración</label></li>
         </ul>
       </div>
       

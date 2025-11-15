@@ -1,13 +1,13 @@
 import serial
 import time
 import requests
-from db import crear_lanzamiento, agregar_fila
+from db import agregar_fila
 
 class LectorSerial:
     #Función para inicializar el lector serial
     def __init__(self, puerto, baudios):
         try:
-            self.puerto = serial.Serial(puerto, baudios, timeout=0)
+            self.puerto = serial.Serial(puerto, baudios, timeout=1)
         except serial.SerialException:
             self.puerto = None
 
@@ -22,13 +22,59 @@ class LectorSerial:
                 'e': None, 'lt':None, 'lg':None, 'h':None,
             }
         
-        if self.puerto.in_waiting == 0:
-            return None
+        #if self.puerto.in_waiting == 0:
+         #   return None
 
         try:
-            linea = self.puerto.readline().decode('utf-8', errors='ignore').strip()
-            if linea:
-                print(f"Linea leída: {linea}")
+            if self.puerto.in_waiting > 0:
+                linea = self.puerto.readline().decode('utf-8', errors='ignore').strip()
+                if linea:
+                    print(f"Linea leída: {linea}")
+
+                    partes = linea.split(',')
+                    datos = {
+                        't': None, 'p': None, 'a': None,
+                        'ax': None, 'ay': None, 'az': None,
+                        'gx': None, 'gy': None, 'gz': None, 'e': None,
+                        'lt':None, 'lg':None, 'h':None,
+                    }
+
+                    for parte in partes:
+                        try:
+                            if parte.startswith("t"):
+                                datos['t'] = float(parte[1:])
+                            elif parte.startswith("p"):
+                                datos['p'] = float(parte[1:])
+                            elif parte.startswith("a") and not parte.startswith(("ax", "ay", "az")):
+                                datos['a'] = float(parte[1:])
+                            elif parte.startswith("ax"):
+                                datos['ax'] = float(parte[2:])
+                            elif parte.startswith("ay"):
+                                datos['ay'] = float(parte[2:])
+                            elif parte.startswith("az"):
+                                datos['az'] = float(parte[2:])
+                            elif parte.startswith("gx"):
+                                datos['gx'] = float(parte[2:])
+                            elif parte.startswith("gy"):
+                                datos['gy'] = float(parte[2:])
+                            elif parte.startswith("gz"):
+                                datos['gz'] = float(parte[2:])
+                            elif parte.startswith("e"):
+                                datos['e'] = int(parte[1:])
+                            elif parte.startswith("lt"):
+                                datos['lt'] = float(parte[2:])
+                            elif parte.startswith("lg"):
+                                datos['lg'] = float(parte[2:])
+                            elif parte.startswith("h"):
+                                datos['h'] = float(parte[1:])
+
+                                
+                        
+                        except ValueError:
+                            # Si hay un dato corrupto, lo ignoramos
+                            continue
+
+                    return datos
         except Exception as e:
             print(e)
             return {
@@ -39,78 +85,37 @@ class LectorSerial:
             }
 
         
-        partes = linea.split(',')
-        datos = {
-            't': None, 'p': None, 'a': None,
-            'ax': None, 'ay': None, 'az': None,
-            'gx': None, 'gy': None, 'gz': None, 'e': None,
-            'lt':None, 'lg':None, 'h':None,
-        }
 
-        for parte in partes:
-            try:
-                if parte.startswith("t"):
-                    datos['t'] = float(parte[1:])
-                elif parte.startswith("p"):
-                    datos['p'] = float(parte[1:])
-                elif parte.startswith("a") and not parte.startswith(("ax", "ay", "az")):
-                    datos['a'] = float(parte[1:])
-                elif parte.startswith("ax"):
-                    datos['ax'] = float(parte[2:])
-                elif parte.startswith("ay"):
-                    datos['ay'] = float(parte[2:])
-                elif parte.startswith("az"):
-                    datos['az'] = float(parte[2:])
-                elif parte.startswith("gx"):
-                    datos['gx'] = float(parte[2:])
-                elif parte.startswith("gy"):
-                    datos['gy'] = float(parte[2:])
-                elif parte.startswith("gz"):
-                    datos['gz'] = float(parte[2:])
-                elif parte.startswith("e"):
-                    datos['e'] = int(parte[1:])
-                elif parte.startswith("lt"):
-                    datos['lt'] = float(parte[2:])
-                elif parte.startswith("lng"):
-                    datos['lg'] = float(parte[2:])
-                elif parte.startswith("h"):
-                    datos['h'] = float(parte[1:])    
-            
-            except ValueError:
-                # Si hay un dato corrupto, lo ignoramos
-                continue
-
-        return datos
     
 
 if __name__ == "__main__":
-    lector = LectorSerial("COM6", 9600)
-    id_lanzamiento_actual = None
+    lector = LectorSerial("COM7", 9600)
+    resp = requests.get('http://localhost:3000/api/lanzamiento/activo', timeout=2)
+    data_activo = resp.json()
+    id_lanzamiento_actual = data_activo.get('id')
     
     print("Leyendo datos del arduino...")
     print("Esperando que se active un lanzamiento...")    
 
     while True:
-        try:
-            resp = requests.get('http://localhost:3000/api/lanzamiento/activo', timeout=2)
-            data_activo = resp.json()
-            id_lanzamiento_actual = data_activo.get('id')
-        except Exception as e:
-            pass  
         # leer datos 
         datos = lector.leer_dato()
         if datos:
             # enviar al servidor 
             try:
-                requests.post('http://localhost:3000/arduino', json=datos, timeout=5)
+                requests.post('http://localhost:3000/arduino', json=datos, timeout=2)
+                agregar_fila(datos, id_lanzamiento_actual)
             except Exception as e:
                 print('Error enviando datos al servidor:', e)
                 
                 if id_lanzamiento_actual:
                     agregar_fila(datos, id_lanzamiento_actual)
                 time.sleep(0.3)
+
+
     
    
+
 
 
 #Linea leída: ax0.01,ay0.04,az-0.99,gx-4.33,gy1.59,gz0.67,t31.05,p1010.63,a1.38

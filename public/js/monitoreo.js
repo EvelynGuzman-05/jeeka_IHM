@@ -21,8 +21,8 @@ function crearGrafica(idCanvas, etiquetas, titulo) {
       responsive: true,
       animation: false,
       plugins: {
-        legend: { labels: { color: '#fff' } },
-        title: { display: true, text: titulo, color: '#fff' }
+        legend: { labels: { color: 'black' } },
+        title: { display: true, text: titulo, color: 'black' }
       },
       scales: {
         x: { ticks: { color: '#ccc' } },
@@ -63,7 +63,7 @@ const graficaLat = crearGrafica('graficaLt', [
 ], 'Latitud');
 
 
-const graficaLng = crearGrafica('graficaLng', [
+const graficaLng = crearGrafica('graficaLg', [
   { label: 'Longitud', color: '#009688' }
 ], 'Longitud');
 
@@ -92,6 +92,7 @@ function actualizarGrafica(chart, valores, label) {
 
 
 socket.on('updateData', data => {
+   console.log("Dato recibido: ", data);
   if (!data) return;
   contador += 1;
   actualizarGrafica(graficaAceleracion, [data.ax, data.ay, data.az], contador);
@@ -101,7 +102,57 @@ socket.on('updateData', data => {
   actualizarGrafica(graficaLat, [data.lt], contador);
   actualizarGrafica(graficaLng, [data.lg], contador);
   actualizarGrafica(graficaH, [data.h], contador);
+
+  // actuzalizar sensores
+    document.getElementById("temperatura").textContent = `TEMPERATURA: ${data.t} °C`;
+    document.getElementById("presion").textContent = `PRESIÓN: ${data.p} hPa`;
+    document.getElementById("altitud").textContent = `ALTITUD: ${data.a} m`;
+
+  if (data.e !== undefined) {
+
+    document.getElementById("lora-ok").checked = false;
+    document.getElementById("lora-error").checked = false;
+    document.getElementById("bmp-ok").checked = false;
+    document.getElementById("bmp-error").checked = false;
+    document.getElementById("sistema-ok").checked = false;
+    document.getElementById("altitud-activado").checked = false;
+    document.getElementById("descenso-activado").checked = false;
+    document.getElementById("aceleracion-activado").checked = false;
+
+    if (data.e === 433) {
+      document.getElementById("lora-ok").checked = true;
+    }
+
+    if (data.e === 434) {
+      document.getElementById("lora-error").checked = true;
+    }
+
+    if (data.e === 280) {
+      document.getElementById("bmp-ok").checked = true;
+    }
+
+    if (data.e === 281) {
+      document.getElementById("bmp-error").checked = true;
+    }
+
+    if (data.e === 100) {
+      document.getElementById("sistema-ok").checked = true;
+    }
+
+    if (data.e === 200) {
+      document.getElementById("altitud-activado").checked = true;
+    }
+
+    if (data.e === 300) {
+      document.getElementById("descenso-activado").checked = true;
+    }
+
+    if (data.e === 400) {
+      document.getElementById("aceleracion-activado").checked = true;
+    }
+  }
 });
+
 
 
 socket.on('lanzamientoDesactivado', () => {

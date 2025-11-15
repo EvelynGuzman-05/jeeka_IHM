@@ -67,7 +67,7 @@ def agregar_fila(datos, id_lanzamiento):
     try:
         conexion = get_connection()
         cursor = conexion.cursor()
-        cursor.execute('INSERT INTO datos_lanzamiento (id_lanzamiento, ax, ay, az, gx, gy, gz, t, p, a, hora, lt, lng, h, e) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s, %s, %s, %s)', 
+        cursor.execute('INSERT INTO datos_lanzamiento (id_lanzamiento, ax, ay, az, gx, gy, gz, t, p, a, hora, lt, lg, h, e) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s, %s, %s, %s)', 
                                (id_lanzamiento, datos['ax'], datos['ay'], datos['az'],
                                 datos['gx'], datos['gy'], datos['gz'],
                                 datos['t'], datos['p'], datos['a'],
@@ -81,6 +81,5 @@ def agregar_fila(datos, id_lanzamiento):
     finally: 
         cursor.close()
         conexion.close() 
-
 
 
